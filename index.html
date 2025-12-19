@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rachit Jain | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #050816;
+      --card: #0f172a;
+      --accent: #22d3ee;
+      --accent-soft: rgba(34, 211, 238, 0.12);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: rgba(148, 163, 184, 0.35);
+      --danger: #f97373;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.65);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0, #020617 55%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1120px;
+      background: radial-gradient(circle at top left, #111827 0, #020617 65%);
+      border-radius: 26px;
+      padding: 24px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 32px 80px rgba(15, 23, 42, 0.85);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shell::before,
+    .shell::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(42px);
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .shell::before {
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.65), transparent);
+      top: -120px;
+      right: -120px;
+    }
+
+    .shell::after {
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(94, 234, 212, 0.75), transparent);
+      bottom: -110px;
+      left: -110px;
+    }
+
+    .content {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr);
+      gap: 24px;
+      z-index: 1;
+    }
+
+    @media (max-width: 860px) {
+      .content {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--muted);
+    }
+
+    .brand-tag span.icon {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.32);
+    }
+
+    .brand-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: #f9fafb;
+    }
+
+    .brand-sub {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .pill {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      font-size: 11px;
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.8);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #38bdf8;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    h1 {
+      font-size: clamp(28px, 4vw, 34px);
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+    }
+
+    h1 span.accent {
+      background: linear-gradient(120deg, #38bdf8, #22c55e);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 34rem;
+    }
+
+    .subgrid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.2fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 680px) {
+      .subgrid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .section-card {
+      background: radial-gradient(circle at top left, #020617 0, #020617 55%);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 14px 16px 15px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        145deg,
+        rgba(56, 189, 248, 0.06),
+        transparent 26%,
+        transparent 74%,
+        rgba(94, 234, 212, 0.06)
+      );
+      pointer-events: none;
+    }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .section-heading {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #e5e7eb;
+    }
+
+    .section-text {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .chip {
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .chip-primary {
+      border-color: rgba(56, 189, 248, 0.7);
+      background: rgba(8, 47, 73, 0.9);
+    }
+
+    .chip-ghost {
+      background: rgba(15, 23, 42, 0.75);
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 8px;
+      align-items: start;
+    }
+
+    .timeline-dot-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin-top: 3px;
+    }
+
+    .timeline-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22d3ee;
+      box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.18);
+    }
+
+    .timeline-line {
+      flex: 1;
+      width: 1px;
+      background: linear-gradient(
+        to bottom,
+        rgba(148, 163, 184, 0.6),
+        transparent
+      );
+    }
+
+    .timeline-main {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    .timeline-title {
+      font-weight: 500;
+      color: #e5e7eb;
+    }
+
+    .timeline-meta {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .timeline-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .photo-card {
+      border-radius: 22px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: radial-gradient(circle at top, #0b1120 0, #020617 75%);
+      box-shadow: 0 26px 70px rgba(15, 23, 42, 0.95);
+      isolation: isolate;
+    }
+
+    .photo-inner {
+      position: relative;
+      padding: 16px 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .photo-tag {
+      align-self: flex-start;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: rgba(15, 23, 42, 0.92);
+      color: var(--muted);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+    }
+
+    .photo-frame {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: #020617;
+      max-height: 340px;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.03);
+      transform-origin: center;
+    }
+
+    .photo-gradient {
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 40%;
+      background: linear-gradient(
+        to top,
+        rgba(15, 23, 42, 0.95),
+        transparent
+      );
+      pointer-events: none;
+    }
+
+    .photo-caption {
+      position: absolute;
+      left: 14px;
+      bottom: 12px;
+      right: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 10px;
+      font-size: 12px;
+      color: #e5e7eb;
+    }
+
+    .photo-caption span.secondary {
+      font-size: 11px;
+      color: var(--muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .photo-chip {
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 11px;
+      color: #bae6fd;
+    }
+
+    .contact-card {
+      background: rgba(15, 23, 42, 0.94);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      padding: 10px 12px 11px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .contact-text {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .contact-highlight {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .button-row {
+      display: inline-flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 7px 13px;
+      font-size: 12px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: var(--accent-soft);
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      border-color: rgba(56, 189, 248, 0.8);
+      background: linear-gradient(120deg, #38bdf8, #22c55e);
+      color: #020617;
+      font-weight: 600;
+    }
+
+    .btn-outline {
+      border-color: rgba(148, 163, 184, 0.85);
+      background: transparent;
+      color: var(--muted);
+    }
+
+    .btn span.bullet {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #020617;
+    }
+
+    .btn-outline span.bullet {
+      background: #38bdf8;
+    }
+
+    @media (max-width: 540px) {
+      .shell {
+        padding: 18px 16px;
+        border-radius: 18px;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .pill-row {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="content">
+      <!-- LEFT -->
+      <div>
+        <header>
+          <div class="brand">
+            <div class="brand-tag">
+              <span class="icon"></span>
+              <span>Open to internships · 2026</span>
+            </div>
+            <div class="brand-name">Rachit Jain</div>
+            <div class="brand-sub">
+              Third‑year B.Tech CSE · IPS Academy, Indore
+            </div>
+          </div>
+          <div class="pill-row">
+            <div class="pill">
+              <span class="pill-dot"></span>
+              <span>Full‑Stack Developer</span>
+            </div>
+            <div class="pill">
+              <span class="pill-dot" style="background:#22c55e;"></span>
+              <span>GATE CSE 2026 Aspirant</span>
+            </div>
+          </div>
+        </header>
+
+        <main>
+          <div>
+            <h1>
+              Building useful web products,<br />
+              while mastering <span class="accent">computer science</span>.
+            </h1>
+            <p class="subtitle">
+              Third‑year B.Tech Computer Science student with a focus on modern
+              web development, strong CS fundamentals, and a long‑term goal of
+              pursuing M.Tech at a top IIT.
+            </p>
+          </div>
+
+          <div class="subgrid">
+            <!-- About / Skills -->
+            <section class="section-card">
+              <div class="section-label">Profile</div>
+              <div class="section-heading">About Rachit</div>
+              <p class="section-text">
+                Passionate about backend‑heavy full‑stack projects, databases,
+                and scalable systems. Actively preparing for GATE CSE 2026 and
+                building products that solve real problems for students and
+                farmers.
+              </p>
+              <div class="chips">
+                <span class="chip chip-primary">JavaScript · Node.js · Express</span>
+                <span class="chip chip-primary">MongoDB · SQL · PostgreSQL</span>
+                <span class="chip chip-ghost">Python · Data Structures & Algorithms</span>
+                <span class="chip chip-ghost">System Design · OS · DBMS</span>
+              </div>
+            </section>
+
+            <!-- Highlights -->
+            <section class="section-card">
+              <div class="section-label">Highlights</div>
+              <div class="section-heading">Leadership & Impact</div>
+              <div class="timeline">
+                <div class="timeline-item">
+                  <div class="timeline-dot-wrap">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-line"></div>
+                  </div>
+                  <div>
+                    <div class="timeline-main">
+                      <div class="timeline-title">
+                        CineCraft Team Lead, Google Developer Groups On Campus
+                      </div>
+                      <div class="timeline-meta">IPS Academy · 2024–25</div>
+                    </div>
+                    <div class="timeline-sub">
+                      Leading media and content production for GDG‑on‑Campus events.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot-wrap">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-line"></div>
+                  </div>
+                  <div>
+                    <div class="timeline-main">
+                      <div class="timeline-title">
+                        Design & Communications, TEDxIPSA Indore
+                      </div>
+                      <div class="timeline-meta">Core Team · 2024</div>
+                    </div>
+                    <div class="timeline-sub">
+                      Crafting visual identity and digital assets for TEDx events.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot-wrap">
+                    <div class="timeline-dot"></div>
+                  </div>
+                  <div>
+                    <div class="timeline-main">
+                      <div class="timeline-title">
+                        Python Internship & DBMS Excellence
+                      </div>
+                      <div class="timeline-meta">2025</div>
+                    </div>
+                    <div class="timeline-sub">
+                      8‑week Python internship (Impetus) and strong scores in
+                      DBMS & PostgreSQL trainings.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="right-col">
+        <section class="photo-card">
+          <div class="photo-inner">
+            <div class="photo-tag">In Frame</div>
+            <div class="photo-frame">
+              <!-- Replace src with your actual photo path -->
+              <img src="PHOTO-2025-02-25-09-19-29.jpg" alt="Rachit Jain" />
+              <div class="photo-gradient"></div>
+              <div class="photo-caption">
+                <div>
+                  <span>Rachit Jain</span>
+                  <span class="secondary">Capturing calm before the next build.</span>
+                </div>
+                <div class="photo-chip">Indore · Developer · Creator</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="contact-card">
+          <div class="contact-text">
+            Let’s talk about internships, collaborations, or your next web idea.
+            <br />
+            <span class="contact-highlight">
+              Prefer backend‑heavy MERN, DBMS‑centric and AI‑assisted projects.
+            </span>
+          </div>
+          <div class="button-row">
+            <a href="mailto:your.email@example.com" class="btn btn-primary">
+              <span class="bullet"></span>
+              Email
+            </a>
+            <a href="https://github.com/your-github" class="btn btn-outline" target="_blank">
+              <span class="bullet"></span>
+              GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/your-linkedin" class="btn btn-outline" target="_blank">
+              <span class="bullet"></span>
+              LinkedIn
+            </a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
